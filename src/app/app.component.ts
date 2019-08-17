@@ -8,9 +8,9 @@ import { Priority, PriorityTimerService } from '../lib/priority-timer.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   //progress bar values
-  private value1;
-  private value2;
-  private value3;
+  public value1;
+  public value2;
+  public value3;
   //button disabled values in different system states
   private buttonDisaledStates:{} = {
     "stopped":[false, true,true,true],
