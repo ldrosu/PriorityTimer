@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Priority, PriorityTimerService } from '../lib/priority-timer.service';
 
 @Component({
@@ -6,28 +6,41 @@ import { Priority, PriorityTimerService } from '../lib/priority-timer.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit, OnDestroy {
-  private _value1;
-  private _value2;
-  private _value3;
-
+export class AppComponent implements OnInit, OnDestroy {
+  //progress bar values
+  private value1;
+  private value2;
+  private value3;
+  //button disabled values in different system states
+  private buttonDisaledStates:{} = {
+    "stopped":[false, true,true,true],
+    "started":[true,false,false,true],
+    "paused":[true,false,true,false]  
+  }
+  //binding values used to disable buttons in the UI
   public startDisabled = true;
   public stopDisabled = false;
   public pauseDisabled = false;
   public resumeDisabled = true;
 
+  //constructor inject the priorityTimer and set a callback function
+  //to handle the notification that all schedules tasks finished 
   constructor(private priorityTimerService: PriorityTimerService) {
+    this.priorityTimerService.timerStopped=()=>this.timerStopped();
   }
-
-  ngAfterViewInit(): void {
+  private timerStopped(){
+    this.setButtonState("stopped"); 
+  }
+  //Start automatically
+  ngOnInit(): void {
     this.reset();
   }
-
+  //stop the servic e when component destroyed
   ngOnDestroy(): void {
     this.priorityTimerService.stop();
   }
-
-  reset() {
+  //reset values and restart
+  private reset() {
     this.value1 = 0;
     this.value2 = 0;
     this.value3 = 0;
@@ -52,78 +65,33 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       Priority.NORMAL
     );
   }
-
-  start(): void {
+  private setButtonState(state:string) {
+    [this.startDisabled,
+    this.stopDisabled,
+    this.pauseDisabled,
+    this.resumeDisabled] = this.buttonDisaledStates[state]; 
+  }
+  public start(): void {
     this.reset();
     this.priorityTimerService.start();
-    this.setButtonStates(true, false, false, true);
+    this.setButtonState("started");
   }
 
-  stop(): void {
+  public stop(): void {
     this.priorityTimerService.stop();
-    this.setButtonStates(false, true, true, true);
   }
 
-  pause(): void {
+  public pause(): void {
     this.priorityTimerService.pause();
-    this.pauseDisabled = true;
-    this.resumeDisabled = false;
+    this.setButtonState("paused");
   }
 
-  resume(): void {
+  public resume(): void {
     this.priorityTimerService.resume();
-    this.pauseDisabled = false;
-    this.resumeDisabled = true;
+    this.setButtonState("resumed");
   }
 
-  public get value1() {
-    return this._value1;
-  }
 
-  public set value1(value: number) {
-    this._value1 = value;
-    if (Math.round(value) === 100) {
-      this.resetStatesOnDone();
-    }
-  }
-
-  public get value2() {
-    return this._value2;
-  }
-
-  public set value2(value: number) {
-    this._value2 = value;
-    if (Math.round(value) === 100) {
-      this.resetStatesOnDone();
-    }
-  }
-
-  public get value3() {
-    return this._value3;
-  }
-
-  public set value3(value: number) {
-    this._value3 = value;
-    if (Math.round(value) === 100) {
-      this.resetStatesOnDone();
-    }
-  }
-
-  private setButtonStates(
-    start: boolean,
-    stop: boolean,
-    pause: boolean,
-    resume: boolean
-  ) {
-    this.startDisabled = start;
-    this.stopDisabled = stop;
-    this.pauseDisabled = pause;
-    this.resumeDisabled = resume;
-  }
-
-  private resetStatesOnDone() {
-    if (this.value1 === 100 && this.value2 === 100 && this.value3 === 100) {
-      this.setButtonStates(false, true, true, true);
-    }
-  }
 }
+
+

@@ -22,6 +22,7 @@ export class PriorityTimerService {
   // State variables initialized to false
   private started = false;
   private paused = false;
+  public timerStopped:any;
 
   constructor() {
     this.prioritySequence = new PrioritySequence();
@@ -44,6 +45,10 @@ export class PriorityTimerService {
       this.started = false;
     }
     this.paused = false;
+    //callback end of all tasks
+    if (this.timerStopped!=undefined) {
+      this.timerStopped();
+    }
   }
   // Pauses the timer tasks are kept in waiting and will be
   public pause() {
