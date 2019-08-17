@@ -64,19 +64,19 @@ repeatFor(x) - discards the action after x milliseconds
 
 ## Examples
 
-priorityTimer.Dispatch(foo)
-    is equivalent to 
-setInterval(foo, 25)
-
-priorityTimer.Dispatch(foo, priorityTimer.once)
-    is equivalent to 
-setTimeout(foo, 25)
-
-priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL)
-    execute foo 5 times every 100 ms
-
-priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH)
-    execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.
+priorityTimer.Dispatch(foo);  
+    is equivalent to  
+setInterval(foo, 25);  
+  
+priorityTimer.Dispatch(foo, priorityTimer.once);  
+    is equivalent to  
+setTimeout(foo, 25);  
+  
+priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);  
+    execute foo 5 times every 100 ms  
+  
+priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);  
+    execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.  
 
 ## Demo
 A live application that uses this service can be seen [here](https://ldrosu.github.io/PriorityTimer/).
