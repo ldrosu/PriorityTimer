@@ -46,9 +46,9 @@ The HGHEST priority (0) task actions are executed every tick, 25 ms, HIGH priori
 
 The pattern repeats itself every 16 ticks as follows:
 
-Tick    |   0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 | 12 | 13 | 14 | 15        
---------|-------------------------------------------------------------------------------
-Priority|  0,1| 0,2| 0,1| 0,3| 0,1| 0,2| 0,1| 0,4| 0,1| 0,2| 0,1| 0,3| 0,1| 0,2| 0,1|  0
+Tick    |   0 |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |  12 |  13 |  14 |  15        
+--------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|----
+Priority| 0,1 | 0,2 | 0,1 | 0,3 | 0,1 | 0,2 | 0,1 | 0,4 | 0,1 | 0,2 | 0,1 | 0,3 | 0,1 | 0,2 | 0,1 |  0
 
 As an example on tick 7 priority 0 actions are executed first then priority 4.  
 
@@ -64,17 +64,19 @@ repeatFor(x) - discards the action after x milliseconds
 
 ## Examples
 
-priorityTimer.Dispatch(foo);
-is equivalent to setInterval(foo, 25);
+priorityTimer.Dispatch(foo)
+    is equivalent to 
+setInterval(foo, 25)
 
-priorityTimer.Dispatch(foo, priorityTimer.once);
-is equivalent to setTimeout(foo, 25);
+priorityTimer.Dispatch(foo, priorityTimer.once)
+    is equivalent to 
+setTimeout(foo, 25)
 
-priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);
-execute foo 5 times every 100 ms.
+priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL)
+    execute foo 5 times every 100 ms
 
-priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);
-execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.
+priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH)
+    execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.
 
 ## Demo
 A live application that uses this service can be seen [here](https://ldrosu.github.io/PriorityTimer/).
