@@ -7,16 +7,16 @@ The priority timer service takes this effort further and adds the concept of pri
 The service maintains a list of task objects which are periodically executed at precise time intervals depending on their priority.
 
 A task has three members:
-    *   function with zero arguments (action), to execute
-    *   function that returns a boolean, true meaning that the action should be removed from the list and never executed again
-    *   priority value
+* function with zero arguments (action), to execute
+* function that returns a boolean, true meaning that the action should be removed from the list and never executed again
+* priority value
 
 There are 5 priorities available 
-    *   HIGHEST - 0,
-    *   HIGH - 1, 
-    *   NORMAL - 2, 
-    *   LOW - 3,
-    *   LOWEST - 4.
+* HIGHEST - 0,
+* HIGH - 1, 
+* NORMAL - 2, 
+* LOW - 3,
+* LOWEST - 4.
 
 ## Advantages
 
