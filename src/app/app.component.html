@@ -1,26 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>Priority Timer Demo</h1>
+  <h1>Inverted Pendulum Simulation </h1>
 </div>
 <br>
 <div style="text-align:center;">
   <div style="width:80%;display:inline-block;">
-    <label>Priority: HIGHEST</label>
-    <mat-progress-bar class = "notransition" color = "primary" mode = "determinate" [value] = "value1">
-    </mat-progress-bar>
+    <svg width="400" height="400">
+      <g transform="translate(200,200) scale(1,-1) ">
+          <line x1="0" y1="-200" x2="0" y2="200" style="stroke:rgb(192, 192, 192);stroke-width:1px;fill-opacity:0.1"/>
+          <line x1="-200" y1="0" x2="200" y2="0" style="stroke:rgb(192, 192, 192);stroke-width:1px;fill-opacity:0.1"/>
+          <g id="x" [attr.transform]="'translate('+uiX+')'">
+              <rect x="-20" y="-10" width="40" height="20" style="fill:white;stroke:black;stroke-width:1px;fill-opacity:0.1;stroke-opacity:1" />                
+              <g id="theta" [attr.transform]="'rotate('+uiTheta+')'">
+                  <line x1="0" y1="0" x2="100" y2="0" style="stroke:rgb(128,128,256);stroke-width:4" shape-rendering="auto" />
+              </g>
+          </g>
+      </g>
+    </svg>
     <br>
-    <label>Priority: HIGH</label>
-    <mat-progress-bar class = "notransition" color = "primary" mode = "determinate" [value] = "value2">
-    </mat-progress-bar>
-    <br>
-    <label>Priority: NORMAL</label>
-    <mat-progress-bar class = "notransition" color = "primary" mode = "determinate" [value] = "value3">
-    </mat-progress-bar>
-    <br>
-    
     <button type="button" mat-raised-button color="primary" [disabled]="startDisabled" (click)="start()">Start</button>
     <button type="button" mat-raised-button color="warn" [disabled]="stopDisabled" (click)="stop()">Stop</button>
     <button type="button" mat-raised-button color="accent" [disabled]="pauseDisabled" (click)="pause()">Pause</button>
     <button type="button" mat-raised-button color="primary" [disabled]="resumeDisabled" (click)="resume()">Resume</button>    
   </div>
-</div>
+</div> 
