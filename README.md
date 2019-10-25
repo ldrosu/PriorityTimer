@@ -64,19 +64,19 @@ repeatFor(x) - discards the action after x milliseconds
 
 ## Examples
 
-priorityTimer.Dispatch(foo);  
-    is equivalent to  
-setInterval(foo, 25);  
+`priorityTimer.Dispatch(foo);`  
+&nbsp;&nbsp; is equivalent to  
+`setInterval(foo, 25);` 
   
-priorityTimer.Dispatch(foo, priorityTimer.once);  
-    is equivalent to  
-setTimeout(foo, 25);  
+`priorityTimer.Dispatch(foo, priorityTimer.once);`  
+&nbsp;&nbsp; is equivalent to  
+`setTimeout(foo, 25);`  
   
-priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);  
-    execute foo 5 times every 100 ms  
+`priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);`  
+&nbsp;&nbsp; execute foo 5 times every 100 ms  
   
-priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);  
-    execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.  
+`priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);`  
+&nbsp;&nbsp; execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.  
 
 ## Demo - Inverted Pendulum
 
@@ -89,18 +89,21 @@ I will not focus on the math here which is available at [this location](https://
 The pendulum uses a integration time step of 10 ms and the ui is refreshed every 40 ms. The priority timer service can be configured with a 10 ms "quantum" and two tasks:
 
 * one task with HIGHEST priority (every tick) for system integration
+```javascript
     this.priorityTimerService.dispatch(
             () => this.step(), //integrate every every 10 ms
             () => this.isBalanced(), //after the system reaches the desired state, drop the task
             Priority.HIGHEST
         );
+```
 * a second task executed with NORMAL priority (every 4 ticks) for display updates
+```javascript
     this.priorityTimerService.dispatch(
             () => this.display(), //update the display every 40 ms 
             () => this.simulation.isBalanced(), //after the system reaches the desired state, drop the task
             Priority.NORMAL
         );
-
+```
 Among the advantages of this aproach we notice that:
 * there is no need to use and manage settimeout or setinterval functions
 * pause and resume functionality is available at the priority timer service level without involving the simulation object itself.  
