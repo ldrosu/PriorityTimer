@@ -63,19 +63,28 @@ repeat(x) - discards the action after x number of execution
 repeatFor(x) - discards the action after x milliseconds
 
 ## Examples
-
-`priorityTimer.Dispatch(foo);`  
+```javascript
+priorityTimer.Dispatch(foo);
+```  
 &nbsp;&nbsp; is equivalent to  
-`setInterval(foo, 25);` 
-  
-`priorityTimer.Dispatch(foo, priorityTimer.once);`  
+```javascript
+setInterval(foo, 25);
+```    
+```javascript
+priorityTimer.Dispatch(foo, priorityTimer.once);
+```  
 &nbsp;&nbsp; is equivalent to  
-`setTimeout(foo, 25);`  
-  
-`priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);`  
+```javascript
+setTimeout(foo, 25);
+```  
+```javascript
+priorityTimer.Dispatch(foo, priorityTimer.repeat(5), Priority.NORMAL);
+```  
 &nbsp;&nbsp; execute foo 5 times every 100 ms  
   
-`priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);`  
+```javascript
+priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);
+```  
 &nbsp;&nbsp; execute foo every 50 ms, until testValue member variable of the calling object is equal to 100.  
 
 ## Demo - Inverted Pendulum
