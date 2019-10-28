@@ -89,11 +89,19 @@ priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);
 
 ## Demo - Inverted Pendulum
 
-A live application that uses this service can be seen [here](https://ldrosu.github.io/PriorityTimer/).
+![Pendulum](/Pendulum.png)
 
-The well known Inverted Pendulum, cart and stick, simulation is shown as an example of how to use the priority timer in a practical application.
+The cart and stick pendulum is a system with two degrees of freedom. If we assume for simplicity that the mass of the cart, the mass and length of the stick, but also the gravity constant are equal to 1, the equations of motion can be written as:
 
-I will not focus on the math here which is available at [this location](https://blog.wolfram.com/2011/01/19/stabilized-inverted-pendulum/), or the integration technique which is trivial but rather on the narrow topic of using the priority timer.
+![Equation 1](/equation1.svg)
+
+![Equation 2](/equation2.svg)
+
+F is the control force applied to the cart to bring it back to the stable equilibrium at ![Equilibrium](/equilibrium.png).
+
+As detailed [here](https://blog.wolfram.com/2011/01/19/stabilized-inverted-pendulum/) the solution to the optimal control problem is given by the feedback rule:
+
+![Control](/control.svg)
 
 The pendulum uses a integration time step of 10 ms and the ui is refreshed every 40 ms. The priority timer service can be configured with a 10 ms "quantum" and two tasks:
 
@@ -117,3 +125,4 @@ Among the advantages of this aproach we notice that:
 * there is no need to use and manage settimeout or setinterval functions
 * pause and resume functionality is available at the priority timer service level without involving the simulation object itself.  
 
+A live application that uses this service can be seen [here](https://ldrosu.github.io/PriorityTimer/).
