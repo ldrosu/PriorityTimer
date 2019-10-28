@@ -89,7 +89,7 @@ priorityTimer.Dispatch(foo, ()=>this.testValue===100, Priority.HIGH);
 
 ## Demo - Inverted Pendulum
 
-![Pendulum](/Pendulum.png)
+![Pendulum](/pendulum.png)
 
 The cart and stick pendulum is a system with two degrees of freedom. If we assume for simplicity that the mass of the cart, the mass and length of the stick, but also the gravity constant are equal to 1, the equations of motion can be written as:
 
@@ -97,7 +97,7 @@ The cart and stick pendulum is a system with two degrees of freedom. If we assum
 
 ![Equation 2](/equation2.svg)
 
-F is the control force applied to the cart to bring it back to the stable equilibrium at ![Equilibrium](/equilibrium.png).
+F is the control force applied to the cart to bring it back to the stable equilibrium at ![Equilibrium](/equilibrium.svg).
 
 As detailed [here](https://blog.wolfram.com/2011/01/19/stabilized-inverted-pendulum/) the solution to the optimal control problem is given by the feedback rule:
 
