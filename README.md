@@ -121,8 +121,5 @@ The pendulum uses a integration time step of 10 ms and the ui is refreshed every
             Priority.NORMAL
         );
 ```
-Among the advantages of this aproach we notice that:
-* there is no need to use and manage settimeout or setinterval functions
-* pause and resume functionality is available at the priority timer service level without involving the simulation object itself.  
 
 A live application that uses this service can be seen [here](https://ldrosu.github.io/PriorityTimer/).
